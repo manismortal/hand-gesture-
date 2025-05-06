@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>হাতের ইশারায় খাবারের মেনু</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>হাতের ইশারায় খাবারের মেনু</h1>
+            <p>আঙুল এবং হাতের ইশারা দিয়ে মেনু পরিবর্তন করুন এবং অর্ডার দিন</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="video-container">
+                <div class="camera-permission" id="cameraPermission">
+                    <h2>ক্যামেরা অ্যাক্সেস প্রয়োজন</h2>
+                    <p>এই অ্যাপ্লিকেশনটি ব্যবহার করতে ক্যামেরা অ্যাক্সেসের অনুমতি দিন</p>
+                    <button class="permission-btn" id="permissionBtn">অনুমতি দিন</button>
+                </div>
+                <video id="video" playsinline></video>
+                <canvas id="canvas"></canvas>
+                <div class="hand-position" id="handPosition"></div>
+                <div class="gesture-feedback" id="gestureFeedback"></div>
+                <button class="play-button" id="playButton" style="display: none;">ভিডিও শুরু করুন</button>
+            </div>
+            
+            <div class="menu-container">
+                <div class="tab-navigation">
+                    <div class="tab active" data-category="appetizers">অ্যাপিটাইজার</div>
+                    <div class="tab" data-category="main">মূল খাবার</div>
+                    <div class="tab" data-category="desserts">ডেজার্ট</div>
+                    <div class="tab" data-category="drinks">পানীয়</div>
+                </div>
+                
+                <div class="menu-category active" id="appetizers">
+                    <h2>অ্যাপিটাইজার</h2>
+                    <div class="menu-item" data-price="250">
+                        <span>চিকেন স্প্রিং রোল</span>
+                        <span class="price">৳250</span>
+                    </div>
+                    <div class="menu-item" data-price="300">
+                        <span>পনির পাকোড়া</span>
+                        <span class="price">৳300</span>
+                    </div>
+                    <div class="menu-item" data-price="220">
+                        <span>মাশরুম চাটনি</span>
+                        <span class="price">৳220</span>
+                    </div>
+                    <div class="menu-item" data-price="180">
+                        <span>আলু পরোটা</span>
+                        <span class="price">৳180</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category" id="main">
+                    <h2>মূল খাবার</h2>
+                    <div class="menu-item" data-price="450">
+                        <span>কাচ্চি বিরিয়ানি</span>
+                        <span class="price">৳450</span>
+                    </div>
+                    <div class="menu-item" data-price="350">
+                        <span>বাটার চিকেন</span>
+                        <span class="price">৳350</span>
+                    </div>
+                    <div class="menu-item" data-price="320">
+                        <span>পালক পনির</span>
+                        <span class="price">৳320</span>
+                    </div>
+                    <div class="menu-item" data-price="400">
+                        <span>হাইদ্রাবাদি বিরিয়ানি</span>
+                        <span class="price">৳400</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category" id="desserts">
+                    <h2>ডেজার্ট</h2>
+                    <div class="menu-item" data-price="150">
+                        <span>রসমালাই</span>
+                        <span class="price">৳150</span>
+                    </div>
+                    <div class="menu-item" data-price="120">
+                        <span>গুলাব জামুন</span>
+                        <span class="price">৳120</span>
+                    </div>
+                    <div class="menu-item" data-price="200">
+                        <span>ফালুদা</span>
+                        <span class="price">৳200</span>
+                    </div>
+                    <div class="menu-item" data-price="180">
+                        <span>ফিরনি</span>
+                        <span class="price">৳180</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category" id="drinks">
+                    <h2>পানীয়</h2>
+                    <div class="menu-item" data-price="80">
+                        <span>লেবুর সরবত</span>
+                        <span class="price">৳80</span>
+                    </div>
+                    <div class="menu-item" data-price="100">
+                        <span>লাচ্ছি</span>
+                        <span class="price">৳100</span>
+                    </div>
+                    <div class="menu-item" data-price="60">
+                        <span>চা</span>
+                        <span class="price">৳60</span>
+                    </div>
+                    <div class="menu-item" data-price="90">
+                        <span>কফি</span>
+                        <span class="price">৳90</span>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <h3>অর্ডার সারাংশ</h3>
+                    <div id="orderItems"></div>
+                    <div class="total">মোট: <span id="totalAmount">৳0</span></div>
+                </div>
+                
+                <button class="confirm-btn" id="confirmBtn">অর্ডার নিশ্চিত করুন</button>
+                
+                <div class="status-indicator" id="statusIndicator"></div>
+                
+                <div class="gesture-guide">
+                    <h3>হাতের ইশারার নির্দেশাবলী:</h3>
+                    <ul>
+                        <li><strong>একটি আঙুল উপরে:</strong> উপরে স্ক্রোল করুন / আগের আইটেমে যান</li>
+                        <li><strong>একটি আঙুল নিচে:</strong> নিচে স্ক্রোল করুন / পরের আইটেমে যান</li>
+                        <li><strong>দুটি আঙুল উপরে:</strong> আগের ক্যাটাগরিতে যান</li>
+                        <li><strong>দুটি আঙুল নিচে:</strong> পরের ক্যাটাগরিতে যান</li>
+                        <li><strong>মুঠো বন্ধ করুন:</strong> আইটেম নির্বাচন করুন</li>
+                        <li><strong>হাত খোলা রাখুন এবং 3 সেকেন্ড ধরে রাখুন:</strong> অর্ডার নিশ্চিত করুন</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
