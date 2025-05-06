@@ -94,6 +94,11 @@ h1 {
     border-left: 4px solid #2d6a4f;
 }
 
+.menu-item.temp-highlight {
+    background-color: #e9ecef;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
 .tab-navigation {
     display: flex;
     margin-bottom: 20px;
@@ -259,4 +264,16 @@ h1 {
     color: #333;
     text-align: center;
     z-index: 1000;
+}
+
+.order-cancelled {
+    background-color: #ffccd5;
+    border-left: 4px solid #c9184a;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
